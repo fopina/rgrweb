@@ -2,7 +2,7 @@ FROM golang:1.14-alpine as builder
 
 ADD . /go/src/rgrweb
 WORKDIR /go/src/rgrweb
-RUN CGO_ENABLED=0 go build -o dist/rgrweb
+RUN CGO_ENABLED=0 go build -ldflags "-s -w" -o dist/rgrweb
 
 FROM scratch
 
