@@ -69,6 +69,6 @@ func main() {
 	})
 
 	http.Handle("/", http.FileServer(http.Dir("static")))
-	log.Println("Listening on " + *bindAddress)
+	log.Println("Listening on http://" + *bindAddress)
 	log.Fatal(http.ListenAndServe(*bindAddress, nil))
 }
