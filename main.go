@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/fopina/rgrweb/assets"
 	gpio "github.com/fopina/rgrweb/helpers"
 	flag "github.com/spf13/pflag"
 )
@@ -68,7 +69,7 @@ func main() {
 		fmt.Fprintf(w, "%v", gpio.ReadFeedback())
 	})
 
-	http.Handle("/", http.FileServer(http.Dir("static")))
+	http.Handle("/", http.FileServer(assets.Assets))
 	log.Println("Listening on http://" + *bindAddress)
 	log.Fatal(http.ListenAndServe(*bindAddress, nil))
 }
