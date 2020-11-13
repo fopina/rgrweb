@@ -35,7 +35,7 @@ func main() {
 
 	if *testInput {
 		log.Println("Use Ctrl-C to stop...")
-		for _ = range time.Tick(time.Second) {
+		for range time.Tick(time.Second) {
 			log.Printf("GPIO%d=%v\n", *gpioIn, gpio.ReadFeedback())
 		}
 	}
