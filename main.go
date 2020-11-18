@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
 	"strings"
@@ -24,6 +25,7 @@ var noAuthRequired = flag.Bool("no-auth", false, "Start without any tokens confi
 var tokens = flag.StringArrayP("token", "t", nil, "Tokens required for authentication, format LOGGING_ID:TOKEN")
 var tokenFile = flag.String("token-file", "", "File containing list of tokens, format LOGGING_ID:TOKEN, one per line")
 var highDuration = flag.DurationP("duration", "d", 5*time.Second, "Time that output GPIO pin will be HIGH")
+var generateToken = flag.Bool("generate-token", false, "Helper to generate random token")
 
 func runIt() error {
 	err := gpio.SetUp(*gpioIn, *gpioOut)
@@ -50,6 +52,17 @@ func runIt() error {
 		gpio.SetTrigger(true)
 		time.Sleep(*highDuration)
 		gpio.SetTrigger(false)
+		return nil
+	}
+
+	if *generateToken {
+		const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+		rand.Seed(time.Now().UnixNano())
+		b := make([]byte, 16)
+		for i := range b {
+			b[i] = letterBytes[rand.Intn(len(letterBytes))]
+		}
+		fmt.Println(string(b))
 		return nil
 	}
 
@@ -127,5 +140,8 @@ func runIt() error {
 
 func main() {
 	flag.Parse()
-	log.Fatal(runIt())
+	err := runIt()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
