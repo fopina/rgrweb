@@ -14,7 +14,7 @@ function checkStatus($led) {
         }
         
     }).fail(function(r) {
-        alert("unexpected error... (" + r.status + ")");
+        alert("Error " + r.status + ": " + r.responseText);
         $led.removeClass('active');
     });
 }
@@ -22,8 +22,19 @@ function checkStatus($led) {
 $(function(){
     var $btn = $('.button-open');
     var $led = $('.led-circle');
+
+    var token = window.location.hash.substring(1)
+    if (token != "") {
+        $.ajaxSetup({
+            headers:{
+               'X-Token': token
+            }
+        });
+    }
+
     checkStatus($led);
-    $btn.click(function() {
+    $btn.click(function(event) {
+        event.preventDefault();
         $btn.addClass('disabled');
         $.get('api/open', function(jd) {
             if (jd == "ok") {
@@ -33,7 +44,7 @@ $(function(){
             }
             
         }).fail(function(r) {
-            alert("unexpected error... (" + r.status + ")");
+            alert("Error " + r.status + ": " + r.responseText);
         }).always(function() {
             $btn.removeClass('disabled');   
         })
