@@ -14,4 +14,4 @@ require (
 	golang.org/x/tools v0.1.12 // indirect
 )
 
-replace github.com/warthog618/gpio v1.0.0 => github.com/fopina/gpio v0.0.0-20221017234359-903628097509
+replace github.com/warthog618/gpio v1.0.0 => github.com/fopina/gpio v0.0.0-20221018093117-69def52fb60f
