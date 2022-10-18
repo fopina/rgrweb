@@ -46,6 +46,7 @@ func runIt() error {
 		for range time.Tick(*highDuration) {
 			log.Printf("GPIO%d=%v\n", *gpioIn, gpio.ReadFeedback())
 		}
+		return nil
 	}
 
 	if *testOutput {
