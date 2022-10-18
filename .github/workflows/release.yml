@@ -7,9 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: 1.18.x
       - name: Run tests
@@ -21,20 +21,18 @@ jobs:
     needs: test
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: 1.18.x
 
       - name: Prepare
         id: prepare
-        run: |
-            TAG=${GITHUB_REF#refs/tags/}
-            echo ::set-output name=tag_name::${TAG}
+        run: echo tag_name=${GITHUB_REF#refs/tags/} >> $GITHUB_OUTPUT
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
@@ -55,9 +53,7 @@ jobs:
 
       - name: Prepare
         id: prepare
-        run: |
-            TAG=${GITHUB_REF#refs/tags/}
-            echo ::set-output name=tag_name::${TAG}
+        run: echo tag_name=${GITHUB_REF#refs/tags/} >> $GITHUB_OUTPUT
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -82,7 +78,7 @@ jobs:
             linux/amd64
             linux/arm64
             linux/arm/v7
-          build-arg: |
+          build-args: |
             VERSION=${{ steps.prepare.outputs.tag_name }}
           tags: |
             fopina/rgrweb:${{ steps.prepare.outputs.tag_name }}
@@ -119,7 +115,7 @@ jobs:
             linux/amd64
             linux/arm64
             linux/arm/v7
-          build-arg: |
+          build-args: |
             VERSION=dev
           tags: |
             fopina/rgrweb:dev
