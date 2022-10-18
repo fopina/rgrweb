@@ -1,8 +1,14 @@
-// +build dev
+//go:build !dev
+// +build !dev
 
 package assets
 
-import "net/http"
+import (
+	"embed"
+	"io/fs"
+)
 
-// Assets contains project assets.
-var Assets http.FileSystem = http.Dir("static")
+//go:embed static
+var embededFiles embed.FS
+
+var Assets, _ = fs.Sub(embededFiles, "static")
