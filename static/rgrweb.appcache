@@ -1,0 +1,13 @@
+CACHE MANIFEST
+# v1
+ 
+CACHE:
+index.html
+ 
+# styles & scripts
+css/main.css
+js/jquery.min.js
+js/main.js
+
+# images
+/favicon.ico
