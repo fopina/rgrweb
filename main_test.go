@@ -237,6 +237,9 @@ func TestRunIt_WithGoodAuth(t *testing.T) {
 	}
 	req.Header.Set("X-Token", "12345")
 	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		t.Fatalf("failed: %v", err)
+	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
