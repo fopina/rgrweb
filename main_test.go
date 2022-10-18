@@ -33,7 +33,7 @@ func reset() {
 	helpers.SetFakeTrigger(false)
 }
 
-func Example_test_input() {
+func DISABLED_Example_test_input() {
 	reset()
 	*testInput = true
 	*highDuration = 6 * time.Millisecond
