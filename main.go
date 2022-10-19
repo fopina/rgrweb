@@ -134,7 +134,7 @@ func runIt() error {
 		fmt.Fprintf(w, "%v", gpio.ReadFeedback())
 	})
 
-	http.Handle("/", http.FileServer(http.FS(assets.Assets)))
+	http.Handle("/", http.FileServer(assets.Assets))
 	log.Println("Listening on http://" + *bindAddress)
 	return http.ListenAndServe(*bindAddress, nil)
 }

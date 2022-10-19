@@ -1,13 +1,7 @@
 CACHE MANIFEST
-# v2
- 
-CACHE:
-index.html
- 
-# styles & scripts
 css/main.css
-js/jquery.min.js
+index.html
+js/jquery.slim.js
 js/main.js
 
-# images
-favicon.ico
+# afe8e4174b278ff47c5abeba99d3b02e1db59ea4f39a361067c744f3c0dd48ae
