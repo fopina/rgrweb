@@ -1,8 +1,8 @@
 dev:
-	@go run -tags=dev main.go --no-auth
+	@go run -tags=dev,nomin main.go --no-auth
 
 dev-auth:
-	@go run -tags=dev main.go --token a:12345
+	@go run -tags=dev,nomin main.go --token a:12345
 
 test:
 	@go test -cover ./...
