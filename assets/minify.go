@@ -55,7 +55,7 @@ func openOutputFile(output string) (*os.File, error) {
 	return w, nil
 }
 
-func minifyAssets() bool {
+func main() {
 	output := minifiedPath
 	root := filepath.Dir(assetPath) + string(os.PathSeparator) + "."
 
@@ -72,8 +72,6 @@ func minifyAssets() bool {
 	m.AddRegexp(regexp.MustCompile("^(application|text)/(x-)?(java|ecma|j|live)script(1\\.[0-5])?$|^module$"), jsMinifier)
 	m.AddRegexp(regexp.MustCompile("[/+]json$"), jsonMinifier)
 	m.AddRegexp(regexp.MustCompile("[/+]xml$"), xmlMinifier)
-
-	success := true
 
 	walkFn := func(path string, d fs.DirEntry, err error) error {
 		if d.Type().IsRegular() {
@@ -121,12 +119,4 @@ func minifyAssets() bool {
 	}
 	os.RemoveAll(output)
 	filepath.WalkDir(root, walkFn)
-
-	return success
-}
-
-func main() {
-	if !minifyAssets() {
-		os.Exit(1)
-	}
 }
