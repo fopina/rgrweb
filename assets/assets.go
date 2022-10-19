@@ -6,9 +6,12 @@ package assets
 import (
 	"embed"
 	"io/fs"
+	"net/http"
 )
 
 //go:embed static
 var embededFiles embed.FS
 
-var Assets, _ = fs.Sub(embededFiles, "static")
+var assetFS, _ = fs.Sub(embededFiles, "static")
+
+var Assets = http.FS(assetFS)
