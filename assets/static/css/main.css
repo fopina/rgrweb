@@ -29,7 +29,6 @@
   }
   
   .button:hover {
-    background-color: #eeeeee;
     background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #dcdcdc));
     background: -webkit-linear-gradient(top, #ffffff, #dcdcdc);
     background: -moz-linear-gradient(top, #ffffff, #dcdcdc);
@@ -91,7 +90,11 @@
     text-shadow: 0 -1px 1px rgba(91, 53, 2, 0.35);
   }
   
-  .button-open:hover {
+  .button-open:hover,
+  .button-open.disabled,
+  .button-open.disabled:hover,
+  .button-open.disabled:active,
+  button.button-open:disabled {
     background-color: #f18d05;
     background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fba42e), color-stop(100%, #d87e04));
     background: -webkit-linear-gradient(top, #fba42e, #d87e04);
@@ -99,12 +102,12 @@
     background: -o-linear-gradient(top, #fba42e, #d87e04);
     background: linear-gradient(top, #fba42e, #d87e04);
   }
-  
+
   .button-open:active {
     background: #d8891e;
     color: #8d5303;
   }
-  
+
   body {
     background-color: #abb2b5;
   }
