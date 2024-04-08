@@ -9,10 +9,11 @@ builds:
   goarch:
     - amd64
     - arm
+    - arm64
+  goarm:
+    - '7'
 archives:
-- replacements:
-    amd64: x86_64
-  files:
+- files:
     - none*
 checksum:
   name_template: 'checksums.txt'
